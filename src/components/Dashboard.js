@@ -21,11 +21,11 @@ const Dashboard = () => {
     }
 
     const handleViewTasks = async () => {
-      navigate('/viewTasks');
+      navigate('/view-tasks');
     }
 
     const handleAddTask = async () => {
-      navigate('/addTask');
+      navigate('/add-task');
     }
 
 

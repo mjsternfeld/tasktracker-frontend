@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ViewTasks = () => {
     const [tasks, setTasks] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:8080/api/tasks/get_tasks')
@@ -9,6 +11,12 @@ const ViewTasks = () => {
             .then(data => setTasks(data))
             .catch(error => console.error('Error fetching tasks:', error));
     }, []); // Empty dependency array means this runs once on mount
+
+
+    const handleEdit = (taskId) => {
+        navigate(`/edit-task/${taskId}`);
+    };    
+
 
     return (
         <div>
@@ -46,6 +54,7 @@ const ViewTasks = () => {
                                 </td>
                                 <td>{task.status}</td>
                                 <td>{task.deadline}</td>
+                                <button onClick={() => handleEdit(task.id)}>Edit</button>
                             </tr>
                         ))}
                     </tbody>
