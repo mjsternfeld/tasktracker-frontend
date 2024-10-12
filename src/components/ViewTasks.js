@@ -23,6 +23,8 @@ const ViewTasks = () => {
                             <th>Title</th>
                             <th>Description</th>
                             <th>Subtasks</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +44,8 @@ const ViewTasks = () => {
                                         <span>No subtasks</span>
                                     )}
                                 </td>
+                                <td>{task.status}</td>
+                                <td>{task.deadline}</td>
                             </tr>
                         ))}
                     </tbody>
