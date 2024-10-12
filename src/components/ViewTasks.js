@@ -15,7 +15,24 @@ const ViewTasks = () => {
 
     const handleEdit = (taskId) => {
         navigate(`/edit-task/${taskId}`);
-    };    
+    };
+    
+    const handleDelete = (taskId) => {
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            fetch(`http://localhost:8080/api/tasks/delete_task${taskId}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Remove the deleted task from the tasks list
+                        setTasks(tasks.filter(task => task.id !== taskId));
+                    } else {
+                        console.error('Error deleting task');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }; 
 
 
     return (
@@ -55,6 +72,7 @@ const ViewTasks = () => {
                                 <td>{task.status}</td>
                                 <td>{task.deadline}</td>
                                 <button onClick={() => handleEdit(task.id)}>Edit</button>
+                                <button onClick={() => handleDelete(task.id)}>Delete</button>
                             </tr>
                         ))}
                     </tbody>
