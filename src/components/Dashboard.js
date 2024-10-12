@@ -1,10 +1,13 @@
 // src/components/Dashboard.js
 import React, {useState} from 'react';
-import './Dashboard.css'; // Create a CSS file for styling
+import './Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
 
     const [message, setMessage] = useState('');
+
+    const navigate = useNavigate();
 
     const handleHelloRequest = async () => {
         try{
@@ -17,12 +20,17 @@ const Dashboard = () => {
         }
     }
 
+    const handleViewTasks = async () => {
+      navigate('/viewTasks');
+    }
+
 
   return (
     <div className="dashboard-container">
       <h1>Task Tracker</h1>
       <div className="button-container">
         <button className="dashboard-button" onClick={handleHelloRequest}>Hello World button</button>
+        <button className="dashboard-button" onClick={handleViewTasks}>View Tasks</button>
         <button className="dashboard-button">Add Task</button>
         <button className="dashboard-button">Add Task-Template</button>
         <button className="dashboard-button">Settings</button>
