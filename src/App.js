@@ -5,6 +5,8 @@ import ViewTasks from './components/ViewTasks';
 import Dashboard from './components/Dashboard';
 import AddTask from './components/AddTask';
 import EditTask from './components/EditTask'
+import RecurringTasksPage from './components/RecurringTasksPage'
+import EditRecurringTaskPage from './components/EditRecurringTask';
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <Route path="/view-tasks" element={<ViewTasks/>}/>
       <Route path="/add-task" element={<AddTask/>}/>
       <Route path="/edit-task/:taskId" element={<EditTask/>}/>
+      <Route path="/recurring-tasks" element={<RecurringTasksPage />} />
+      <Route path="/edit-recTask/:id" element={<EditRecurringTaskPage/>} />
       </Routes>
     </div>
   );

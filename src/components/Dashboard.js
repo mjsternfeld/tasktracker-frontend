@@ -28,6 +28,10 @@ const Dashboard = () => {
       navigate('/add-task');
     }
 
+    const handleRecTasks = async () => {
+      navigate('/recurring-tasks');
+    }
+
 
   return (
     <div className="dashboard-container">
@@ -36,7 +40,7 @@ const Dashboard = () => {
         <button className="dashboard-button" onClick={handleHelloRequest}>Hello World button</button>
         <button className="dashboard-button" onClick={handleViewTasks}>View / Edit Tasks</button>
         <button className="dashboard-button" onClick={handleAddTask}>Add Task or Template</button>
-        <button className="dashboard-button">Settings</button>
+        <button className="dashboard-button" onClick={handleRecTasks}>Add / View / Edit Recurring Tasks</button>
         <button className="dashboard-button">View Task History and Statistics</button>        
       </div>
       {message && <p>{message}</p>}
