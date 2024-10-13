@@ -35,8 +35,7 @@ const Dashboard = () => {
       <div className="button-container">
         <button className="dashboard-button" onClick={handleHelloRequest}>Hello World button</button>
         <button className="dashboard-button" onClick={handleViewTasks}>View / Edit Tasks</button>
-        <button className="dashboard-button" onClick={handleAddTask}>Add Task</button>
-        <button className="dashboard-button">Add Task-Template</button>
+        <button className="dashboard-button" onClick={handleAddTask}>Add Task or Template</button>
         <button className="dashboard-button">Settings</button>
         <button className="dashboard-button">View Task History and Statistics</button>        
       </div>

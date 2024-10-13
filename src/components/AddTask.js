@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 const AddTask = () => {
   const [task, setTask] = useState({
@@ -8,6 +9,35 @@ const AddTask = () => {
     deadline: '',
     subtasks: [],
   });
+
+  const [templates, setTemplates] = useState([]);
+
+  const loadTemplate = (template) => {
+    
+    const formattedDeadline = template.deadline ? new Date(template.deadline).toISOString().split('T')[0] : ''; //to avoid the issue where the date is null when the date format isn't correct
+    
+    setTask({
+      title: template.title,
+      description: template.description,
+      status: template.status,
+      deadline: formattedDeadline,
+      subtasks: template.subtasks || [],  // Ensure that subtasks are handled even if undefined
+    });
+  };
+
+  // Fetch templates from the API
+  const fetchTemplates = () => {
+    fetch('http://localhost:8080/api/tasks/get_templates')  // Assuming this endpoint returns tasks where isTemplate=true
+      .then(response => response.json())
+      .then(data => setTemplates(data))  // Save templates into state
+      .catch(error => console.error('Error fetching templates:', error));
+  };
+
+
+  useEffect(() => {
+    fetchTemplates();
+  }, []); // Empty dependency array means this runs once on mount
+
 
   // Handle input changes for the task fields
   const handleInputChange = (e) => {
@@ -42,13 +72,29 @@ const AddTask = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
+
+
+
+    // Make a shallow copy of the task object to avoid mutating the state directly
+    const taskToSubmit = {
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      deadline: task.deadline,  
+      subtasks: task.subtasks.map(subtask => {
+        const { subtaskId, ...rest } = subtask;  // Remove the 'id' field
+        return rest
+      })
+    };
+
     // Example POST request
     fetch('http://localhost:8080/api/tasks/import_task', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(task), // Send task with subtasks as JSON
+      body: JSON.stringify(taskToSubmit), // Send task with subtasks as JSON
     })
       .then((response) => {
         if (!response.ok) {
@@ -64,6 +110,69 @@ const AddTask = () => {
         console.error('Error:', error);
       });
   };
+
+
+  // Submit the form with a POST request
+  const handleSubmitTemplate = (e) => {
+    e.preventDefault();
+    // Make a shallow copy of the task object to avoid mutating the state directly
+    const taskToSubmit = {
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      deadline: task.deadline,
+      template: true,  
+      subtasks: task.subtasks.map(subtask => {
+        const { subtaskId, ...rest } = subtask;  // Remove the 'id' field
+        return rest
+      })
+    };
+
+
+    // Example POST request
+    fetch('http://localhost:8080/api/tasks/import_task', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(taskToSubmit), // Send task with subtasks as JSON
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to save template');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Template saved:', data);
+        // Handle successful task save (e.g., navigate back to task list)
+        fetchTemplates();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      task.template = false;
+      
+  };
+
+
+  const handleDeleteTemplate = (template) => {
+    if (window.confirm('Are you sure you want to delete this template?')) {
+        fetch(`http://localhost:8080/api/tasks/delete_task${template.id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                  fetchTemplates();
+                } else {
+                    console.error('Error deleting task');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+  }; 
+
+
 
   return (
     <div>
@@ -171,8 +280,30 @@ const AddTask = () => {
 
         <br />
         <button type="submit">Save</button>
+        <button type="button" onClick={handleSubmitTemplate}>Save as Template</button>        
       </form>
+    
+      <h2>Or choose a template</h2>
+        {templates.length === 0 ? (
+            <p>No templates available.</p>
+        ) : (
+            <ul>
+                {templates.map(template => (
+                    <li key={template.id}>
+                        <span>{template.title}</span>
+                        <button onClick={() => loadTemplate(template)}>Use this template</button>
+                        <button onClick={() => handleDeleteTemplate(template)}>Delete this template</button>
+                    </li>
+                ))}
+            </ul>
+        )}
+    
+    
+    
     </div>
+    
+
+
   );
 };
 
