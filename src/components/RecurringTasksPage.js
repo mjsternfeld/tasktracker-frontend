@@ -6,9 +6,8 @@ const RecurringTasksPage = () => {
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
-        repeatInterval: '',
+        repeatInterval: 'P1D',
         nextOccurrence: '',
-        customInterval: '',
     });
     const navigate = useNavigate();
 
@@ -31,17 +30,13 @@ const RecurringTasksPage = () => {
         }
     };
 
+    
+
     // Handle form submission for adding a new recurring task
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const finalRepeatInterval =
-            newTask.repeatInterval === 'custom' ? newTask.customInterval : newTask.repeatInterval;
-
-        const taskToSubmit = {
-            ...newTask,
-            repeatInterval: finalRepeatInterval,
-        };
+        
 
         try {
             const response = await fetch('http://localhost:8080/api/recurringTasks/save_recTask', {
@@ -49,7 +44,7 @@ const RecurringTasksPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(taskToSubmit),
+                body: JSON.stringify(newTask),
             });
 
             if (response.ok) {
@@ -61,7 +56,6 @@ const RecurringTasksPage = () => {
                     description: '',
                     repeatInterval: '',
                     nextOccurrence: '',
-                    customInterval: '',
                 });
             } else {
                 console.error('Failed to add recurring task');
@@ -91,6 +85,13 @@ const RecurringTasksPage = () => {
     } 
 
 
+        
+    
+    
+    
+    
+
+
     return (
         <div>
             <h1>Recurring Tasks</h1>
@@ -118,32 +119,19 @@ const RecurringTasksPage = () => {
                 <div>
                     <label>Repeat Interval:</label>
                     <select
-                        value={newTask.repeatInterval}
-                        onChange={(e) => setNewTask({ ...newTask, repeatInterval: e.target.value })}
+                        value={newTask.repeatInterval}   // Bind to the state value
+                        onChange={(e) => setNewTask({...newTask, repeatInterval: e.target.value})}  // Call the change handler directly
                     >
-                        <option value="1h">Hourly</option>
-                        <option value="1d">Daily</option>
-                        <option value="1w">Weekly</option>
-                        <option value="1M">Monthly</option>
-                        <option value="custom">Custom</option>
+                        <option value='P1D' selected>Daily</option>
+                        <option value='P1W'>Weekly</option>
+                        <option value='P1M'>Monthly</option>
                     </select>
                 </div>
 
-                {newTask.repeatInterval === 'custom' && (
-                    <div>
-                        <label>Custom Interval:</label>
-                        <input
-                            type="text"
-                            placeholder="e.g., 3h, 2d"
-                            value={newTask.customInterval}
-                            onChange={(e) => setNewTask({ ...newTask, customInterval: e.target.value })}
-                            required
-                        />
-                    </div>
-                )}
+                
 
                 <div>
-                    <label>Next Occurrence:</label>
+                    <label>Starting date:</label>
                     <input
                         type="datetime-local"
                         value={newTask.nextOccurrence}
