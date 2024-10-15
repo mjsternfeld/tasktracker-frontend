@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './RecurringTasksPage.css'; // Ensure your styles are imported
 
 const RecurringTasksPage = () => {
     const [recurringTasks, setRecurringTasks] = useState([]);
@@ -30,14 +31,9 @@ const RecurringTasksPage = () => {
         }
     };
 
-    
-
     // Handle form submission for adding a new recurring task
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        
-
         try {
             const response = await fetch('http://localhost:8080/api/recurringTasks/save_recTask', {
                 method: 'POST',
@@ -54,7 +50,7 @@ const RecurringTasksPage = () => {
                 setNewTask({
                     title: '',
                     description: '',
-                    repeatInterval: '',
+                    repeatInterval: 'P1D', // Reset to default
                     nextOccurrence: '',
                 });
             } else {
@@ -67,7 +63,7 @@ const RecurringTasksPage = () => {
 
     const handleDelete = async (taskId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/recurringTasks/delete_recTask${taskId}`, {
+            const response = await fetch(`http://localhost:8080/api/recurringTasks/delete_recTask/${taskId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -82,21 +78,14 @@ const RecurringTasksPage = () => {
 
     const handleEdit = async (taskId) => {
         navigate(`/edit-recTask/${taskId}`);
-    } 
-
-
-        
-    
-    
-    
-    
-
+    };
 
     return (
         <div>
             <h1>Recurring Tasks</h1>
 
             {/* Add New Recurring Task Form */}
+            <h2>Add New Recurring Tasks</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Title:</label>
@@ -119,17 +108,14 @@ const RecurringTasksPage = () => {
                 <div>
                     <label>Repeat Interval:</label>
                     <select
-                        value={newTask.repeatInterval}   // Bind to the state value
-                        onChange={(e) => setNewTask({...newTask, repeatInterval: e.target.value})}  // Call the change handler directly
+                        value={newTask.repeatInterval}
+                        onChange={(e) => setNewTask({ ...newTask, repeatInterval: e.target.value })}
                     >
-                        <option value='P1D' selected>Daily</option>
+                        <option value='P1D'>Daily</option>
                         <option value='P1W'>Weekly</option>
                         <option value='P1M'>Monthly</option>
                     </select>
                 </div>
-
-                
-
                 <div>
                     <label>Starting date:</label>
                     <input
@@ -139,7 +125,6 @@ const RecurringTasksPage = () => {
                         required
                     />
                 </div>
-
                 <button type="submit">Add Recurring Task</button>
             </form>
 
@@ -148,10 +133,10 @@ const RecurringTasksPage = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Title | </th>
-                        <th>Description | </th>
-                        <th>Repeat Interval | </th>
-                        <th>Next Occurrence | </th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Repeat Interval</th>
+                        <th>Next Occurrence</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

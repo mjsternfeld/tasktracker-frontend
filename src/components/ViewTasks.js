@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './ViewTasks.css';
 
 const ViewTasks = () => {
     const [tasks, setTasks] = useState([]);

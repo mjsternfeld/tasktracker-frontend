@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './EditRecurringTask.css';
 
 const EditRecurringTaskPage = () => {
 
@@ -15,13 +16,8 @@ const EditRecurringTaskPage = () => {
     
     const navigate = useNavigate();
 
-    // Load the task data on mount and when the id changes
-    useEffect(() => {
-        loadTask();
-    }, [id]);
-
     // Fetch the task details from the server
-    const loadTask = async () => {
+    const loadCurrentTask = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/recurringTasks/get_recTask${id}`);
             if (response.ok) {
@@ -37,6 +33,11 @@ const EditRecurringTaskPage = () => {
             console.error('Error loading recurring task:', error);
         }
     };
+
+    // Load the task data on mount and when the id changes
+    useEffect(() => {
+        loadCurrentTask();
+    });
 
     // Handle the form submission to update the task
     const handleSubmit = async (e) => {
@@ -71,7 +72,7 @@ const EditRecurringTaskPage = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Edit Recurring Task</h1>
 
             <form onSubmit={handleSubmit}>

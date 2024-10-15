@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import './EditTask.css';
 
 const EditTask = () => {
     const { taskId } = useParams(); // Get taskId from URL params
@@ -83,121 +84,121 @@ const EditTask = () => {
     };
 
     return (
-    <div>
+      <div className="container">
       <h1>Edit Task</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={task.title}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={task.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="status">Status:</label>
-          <select
-            id="status"
-            name="status"
-            value={task.status}
-            onChange={handleInputChange}
-          >
-            <option value="inactive">Inactive</option>
-            <option value="active">Active</option>
-            <option value="completed">Completed</option>
-            <option value="failed">Failed</option>
-            <option value="notRelevantAnymore">Not Relevant Anymore</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="deadline">Deadline:</label>
-          <input
-            type="date"
-            id="deadline"
-            name="deadline"
-            value={task.deadline}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <h3>Subtasks</h3>
-        {task.subtasks.length > 0 ? (
-          task.subtasks.map((subtask, index) => (
-            <div key={index}>
-              <div>
-                <label htmlFor={`subtaskTitle-${index}`}>Subtask title:</label>
-                <input
+          <div>
+              <label htmlFor="title">Title:</label>
+              <input
                   type="text"
-                  id={`subtaskTitle-${index}`}
+                  id="title"
                   name="title"
-                  value={subtask.title}
-                  onChange={(e) => handleSubtaskChange(index, e)}
-                />
-              </div>
-              <div>
-                <label htmlFor={`subtaskDescription-${index}`}>Subtask description:</label>
-                <input
+                  value={task.title}
+                  onChange={handleInputChange}
+                  required
+              />
+          </div>
+          <div>
+              <label htmlFor="description">Description:</label>
+              <input
                   type="text"
-                  id={`subtaskDescription-${index}`}
+                  id="description"
                   name="description"
-                  value={subtask.description}
-                  onChange={(e) => handleSubtaskChange(index, e)}
-                />
-              </div>
-              <div>
-                <label htmlFor={`subtaskStatus-${index}`}>Subtask status:</label>
-                <select
-                  id={`subtaskStatus-${index}`}
+                  value={task.description}
+                  onChange={handleInputChange}
+              />
+          </div>
+          <div>
+              <label htmlFor="status">Status:</label>
+              <select
+                  id="status"
                   name="status"
-                  value={subtask.status}
-                  onChange={(e) => handleSubtaskChange(index, e)}
-                >
+                  value={task.status}
+                  onChange={handleInputChange}
+              >
                   <option value="inactive">Inactive</option>
                   <option value="active">Active</option>
                   <option value="completed">Completed</option>
                   <option value="failed">Failed</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="subtaskDeadline">Subtask deadline:</label>
-                <input
-                    type="date"
-                    id="subtaskDeadline"
-                    name="subtaskDeadline"
-                    value={subtask.deadline}
-                    onChange={handleInputChange}
-                />
-              </div>
-              <button type="button" onClick={() => removeSubtask(index)}>
-                Remove Subtask
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>No subtasks available.</p>
-        )}
-        <button type="button" onClick={addSubtask}>
-          Add Subtask
-        </button>
+                  <option value="notRelevantAnymore">Not Relevant Anymore</option>
+              </select>
+          </div>
+          <div>
+              <label htmlFor="deadline">Deadline:</label>
+              <input
+                  type="date"
+                  id="deadline"
+                  name="deadline"
+                  value={task.deadline}
+                  onChange={handleInputChange}
+              />
+          </div>
 
-        <div>
-          <button type="submit">Save Changes</button>
-        </div>
+          <h3>Subtasks</h3>
+          {task.subtasks.length > 0 ? (
+              task.subtasks.map((subtask, index) => (
+                  <div key={index}>
+                      <div>
+                          <label htmlFor={`subtaskTitle-${index}`}>Subtask title:</label>
+                          <input
+                              type="text"
+                              id={`subtaskTitle-${index}`}
+                              name="title"
+                              value={subtask.title}
+                              onChange={(e) => handleSubtaskChange(index, e)}
+                          />
+                      </div>
+                      <div>
+                          <label htmlFor={`subtaskDescription-${index}`}>Subtask description:</label>
+                          <input
+                              type="text"
+                              id={`subtaskDescription-${index}`}
+                              name="description"
+                              value={subtask.description}
+                              onChange={(e) => handleSubtaskChange(index, e)}
+                          />
+                      </div>
+                      <div>
+                          <label htmlFor={`subtaskStatus-${index}`}>Subtask status:</label>
+                          <select
+                              id={`subtaskStatus-${index}`}
+                              name="status"
+                              value={subtask.status}
+                              onChange={(e) => handleSubtaskChange(index, e)}
+                          >
+                              <option value="inactive">Inactive</option>
+                              <option value="active">Active</option>
+                              <option value="completed">Completed</option>
+                              <option value="failed">Failed</option>
+                          </select>
+                      </div>
+                      <div>
+                          <label htmlFor={`subtaskDeadline-${index}`}>Subtask deadline:</label>
+                          <input
+                              type="date"
+                              id={`subtaskDeadline-${index}`}
+                              name="deadline"
+                              value={subtask.deadline}
+                              onChange={(e) => handleSubtaskChange(index, e)}
+                          />
+                      </div>
+                      <button type="button" onClick={() => removeSubtask(index)}>
+                          Remove Subtask
+                      </button>
+                  </div>
+              ))
+          ) : (
+              <p>No subtasks available.</p>
+          )}
+          <button type="button" onClick={addSubtask}>
+              Add Subtask
+          </button>
+
+          <div>
+              <button type="submit">Save Changes</button>
+          </div>
       </form>
-    </div>
+  </div>
     );
 };
 
