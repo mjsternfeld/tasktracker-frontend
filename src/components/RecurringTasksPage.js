@@ -19,7 +19,7 @@ const RecurringTasksPage = () => {
 
     const loadRecurringTasks = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/recurringTasks/get_recTasks');
+            const response = await fetch('http://localhost:8080/api/recurring-tasks');
             if (response.ok) {
                 const data = await response.json();
                 setRecurringTasks(data);
@@ -35,7 +35,7 @@ const RecurringTasksPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8080/api/recurringTasks/save_recTask', {
+            const response = await fetch('http://localhost:8080/api/recurring-tasks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const RecurringTasksPage = () => {
 
     const handleDelete = async (taskId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/recurringTasks/delete_recTask/${taskId}`, {
+            const response = await fetch(`http://localhost:8080/api/recurring-tasks/${taskId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

@@ -14,7 +14,7 @@ const EditTask = () => {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/tasks/get_task${taskId}`)
+        fetch(`http://localhost:8080/api/tasks/${taskId}`)
             .then(response => response.json())
             .then(data => setTask(data))
             .catch(error => console.error('Error fetching task:', error));
@@ -62,7 +62,7 @@ const EditTask = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:8080/api/tasks/update_task`, {
+        fetch(`http://localhost:8080/api/tasks/${taskId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

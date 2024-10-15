@@ -7,7 +7,7 @@ const ViewTasks = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/tasks/get_tasks')
+        fetch('http://localhost:8080/api/tasks')
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch(error => console.error('Error fetching tasks:', error));
@@ -20,7 +20,7 @@ const ViewTasks = () => {
     
     const handleDelete = (taskId) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
-            fetch(`http://localhost:8080/api/tasks/delete_task${taskId}`, {
+            fetch(`http://localhost:8080/api/tasks/${taskId}`, {
                 method: 'DELETE',
             })
                 .then(response => {
@@ -51,6 +51,7 @@ const ViewTasks = () => {
                             <th>Subtasks</th>
                             <th>Status</th>
                             <th>Deadline</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

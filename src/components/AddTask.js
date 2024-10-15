@@ -27,7 +27,7 @@ const AddTask = () => {
 
   // Fetch templates from the API
   const fetchTemplates = () => {
-    fetch('http://localhost:8080/api/tasks/get_templates')  // Assuming this endpoint returns tasks where isTemplate=true
+    fetch('http://localhost:8080/api/tasks/templates')  // Assuming this endpoint returns tasks where isTemplate=true
       .then(response => response.json())
       .then(data => setTemplates(data))  // Save templates into state
       .catch(error => console.error('Error fetching templates:', error));
@@ -89,7 +89,7 @@ const AddTask = () => {
     };
 
     // Example POST request
-    fetch('http://localhost:8080/api/tasks/import_task', {
+    fetch('http://localhost:8080/api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ const AddTask = () => {
 
 
     // Example POST request
-    fetch('http://localhost:8080/api/tasks/import_task', {
+    fetch('http://localhost:8080/api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const AddTask = () => {
 
   const handleDeleteTemplate = (template) => {
     if (window.confirm('Are you sure you want to delete this template?')) {
-        fetch(`http://localhost:8080/api/tasks/delete_task${template.id}`, {
+        fetch(`http://localhost:8080/api/tasks/${template.id}`, {
             method: 'DELETE',
         })
             .then(response => {

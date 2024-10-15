@@ -14,7 +14,7 @@ const Dashboard = () => {
 
 
     const fetchTasks = () => {
-      fetch('http://localhost:8080/api/tasks/get_tasks')
+      fetch('http://localhost:8080/api/tasks')
       .then(response => response.json())
       .then(data => {
         const activeTasks = data.filter(task => task.status === 'active');
@@ -38,7 +38,7 @@ const Dashboard = () => {
         status: newStatus, // Update the status while keeping other fields unchanged
       };
       try {
-          const response = await fetch(`http://localhost:8080/api/tasks/update_task`, {
+          const response = await fetch(`http://localhost:8080/api/tasks/${updatedTask.id}`, {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json',

@@ -19,7 +19,7 @@ const EditRecurringTaskPage = () => {
     // Fetch the task details from the server
     const loadCurrentTask = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/recurringTasks/get_recTask${id}`);
+            const response = await fetch(`http://localhost:8080/api/recurring-tasks/${id}`);
             if (response.ok) {
                 const data = await response.json();
                 setTask({
