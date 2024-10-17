@@ -29,6 +29,11 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.button-container {
+  display: grid;
+  align-items: center;
+}
+
 .dashboard-button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }

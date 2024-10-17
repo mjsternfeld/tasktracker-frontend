@@ -7,12 +7,14 @@ import AddTask from './components/AddTask';
 import EditTask from './components/EditTask'
 import RecurringTasksPage from './components/RecurringTasksPage'
 import EditRecurringTaskPage from './components/EditRecurringTask';
+import Login from './components/Login';
 
 const App = () => {
   return (
     <div>
       <Routes>
-      <Route path="/" element={<Dashboard/>}/>
+      <Route path="/" element={<Login/>}/>
+      <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/view-tasks" element={<ViewTasks/>}/>
       <Route path="/add-task" element={<AddTask/>}/>
       <Route path="/edit-task/:taskId" element={<EditTask/>}/>

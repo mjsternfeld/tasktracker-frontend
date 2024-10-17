@@ -12,9 +12,15 @@ const EditTask = () => {
         deadline: '',
         subtasks: []
     });
+    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/tasks/${taskId}`)
+        fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => setTask(data))
             .catch(error => console.error('Error fetching task:', error));
@@ -66,6 +72,7 @@ const EditTask = () => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(task),
         })

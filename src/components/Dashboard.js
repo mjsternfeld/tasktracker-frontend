@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
 
     const [tasks, setTasks] = useState([]);
+    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+
+
 
     useEffect(() => {
         fetchTasks();
@@ -14,7 +17,12 @@ const Dashboard = () => {
 
 
     const fetchTasks = () => {
-      fetch('http://localhost:8080/api/tasks')
+      fetch('http://localhost:8080/api/tasks', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
       .then(response => response.json())
       .then(data => {
         const activeTasks = data.filter(task => task.status === 'active');
@@ -42,6 +50,7 @@ const Dashboard = () => {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
               },
               body: JSON.stringify(updatedTask),
           });
@@ -77,7 +86,7 @@ const Dashboard = () => {
       navigate('/recurring-tasks');
     }
     const handleStats = async () => {
-      navigate('/');
+      navigate('/dashboard');
     }
 
 
@@ -152,8 +161,7 @@ const Dashboard = () => {
       <div className="button-container">
         <button className="dashboard-button" onClick={handleViewTasks}>View / Edit all Tasks</button>
         <button className="dashboard-button" onClick={handleAddTask}>Add Task or Template</button>
-        <button className="dashboard-button" onClick={handleRecTasks}>Add / View / Edit Recurring Tasks</button>
-        <button className="dashboard-button" onClick={handleStats}>View Task History and Statistics</button>        
+        <button className="dashboard-button" onClick={handleRecTasks}>Add / View / Edit Recurring Tasks</button> 
       </div>
     </div>
   );

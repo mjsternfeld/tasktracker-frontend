@@ -5,9 +5,15 @@ import './ViewTasks.css';
 const ViewTasks = () => {
     const [tasks, setTasks] = useState([]);
     const navigate = useNavigate();
+    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/tasks')
+        fetch('http://localhost:8080/api/tasks', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch(error => console.error('Error fetching tasks:', error));
@@ -22,6 +28,9 @@ const ViewTasks = () => {
         if (window.confirm('Are you sure you want to delete this task?')) {
             fetch(`http://localhost:8080/api/tasks/${taskId}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
                 .then(response => {
                     if (response.ok) {

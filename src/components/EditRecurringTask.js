@@ -11,6 +11,8 @@ const EditRecurringTaskPage = () => {
         nextOccurrence: '',
         customInterval: '',
     });
+    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+
     
     const { id } = useParams(); // Get the task ID from the URL params
     
@@ -19,7 +21,13 @@ const EditRecurringTaskPage = () => {
     // Fetch the task details from the server
     const loadCurrentTask = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/recurring-tasks/${id}`);
+            const response = await fetch('http://localhost:8080/api/recurring-tasks/${id}', {
+                method: 'GET',
+                headers: {
+                  'Authorization': `Bearer ${token}`
+                }
+              })
+
             if (response.ok) {
                 const data = await response.json();
                 setTask({
@@ -57,6 +65,7 @@ const EditRecurringTaskPage = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(taskToSubmit),
             });

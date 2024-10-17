@@ -11,6 +11,8 @@ const AddTask = () => {
   });
 
   const [templates, setTemplates] = useState([]);
+  const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+
 
   const loadTemplate = (template) => {
     
@@ -27,7 +29,12 @@ const AddTask = () => {
 
   // Fetch templates from the API
   const fetchTemplates = () => {
-    fetch('http://localhost:8080/api/tasks/templates')  // Assuming this endpoint returns tasks where isTemplate=true
+    fetch('http://localhost:8080/api/tasks/templates', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })  // Assuming this endpoint returns tasks where isTemplate=true
       .then(response => response.json())
       .then(data => setTemplates(data))  // Save templates into state
       .catch(error => console.error('Error fetching templates:', error));
@@ -88,11 +95,14 @@ const AddTask = () => {
       })
     };
 
+    const token = localStorage.getItem('token');
+
     // Example POST request
     fetch('http://localhost:8080/api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(taskToSubmit), // Send task with subtasks as JSON
     })
@@ -128,12 +138,13 @@ const AddTask = () => {
       })
     };
 
-
+    const token = localStorage.getItem('token');
     // Example POST request
     fetch('http://localhost:8080/api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(taskToSubmit), // Send task with subtasks as JSON
     })
@@ -160,6 +171,9 @@ const AddTask = () => {
     if (window.confirm('Are you sure you want to delete this template?')) {
         fetch(`http://localhost:8080/api/tasks/${template.id}`, {
             method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
         })
             .then(response => {
                 if (response.ok) {
