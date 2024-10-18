@@ -5,7 +5,7 @@ import './ViewTasks.css';
 const ViewTasks = () => {
     const [tasks, setTasks] = useState([]);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('token'); //retrieve JWT from localStorage
     const backendUrl = process.env.REACT_APP_API_URL;
 
 
@@ -18,9 +18,9 @@ const ViewTasks = () => {
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch(error => console.error('Error fetching tasks:', error));
-    }, []); // Empty dependency array means this runs once on mount
+    }, []);
 
-
+    //navigate to an edit page for the specific task with that ID
     const handleEdit = (taskId) => {
         navigate(`/edit-task/${taskId}`);
     };
@@ -34,12 +34,10 @@ const ViewTasks = () => {
                 }
             })
                 .then(response => {
-                    if (response.ok) {
-                        // Remove the deleted task from the tasks list
-                        setTasks(tasks.filter(task => task.id !== taskId));
-                    } else {
+                    if (response.ok)
+                        setTasks(tasks.filter(task => task.id !== taskId)); //remove the deleted task from the tasks list
+                    else
                         console.error('Error deleting task');
-                    }
                 })
                 .catch(error => console.error('Error:', error));
         }

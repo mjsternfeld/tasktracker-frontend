@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './RecurringTasksPage.css'; // Ensure your styles are imported
-
+import './RecurringTasksPage.css'; 
 const RecurringTasksPage = () => {
     const [recurringTasks, setRecurringTasks] = useState([]);
     const [newTask, setNewTask] = useState({
@@ -11,11 +10,11 @@ const RecurringTasksPage = () => {
         nextOccurrence: '',
     });
     const navigate = useNavigate();
-    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('token'); //retrieve JWT from localStorage
     const backendUrl = process.env.REACT_APP_API_URL;
 
 
-    // Load the existing recurring tasks from the backend
+    //load the existing recurring tasks from the backend
     useEffect(() => {
         loadRecurringTasks();
     }, []);
@@ -38,7 +37,7 @@ const RecurringTasksPage = () => {
         }
     };
 
-    // Handle form submission for adding a new recurring task
+    //handle form submission for adding a new recurring task
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -61,9 +60,8 @@ const RecurringTasksPage = () => {
                     repeatInterval: 'P1D', // Reset to default
                     nextOccurrence: '',
                 });
-            } else {
+            } else
                 console.error('Failed to add recurring task');
-            }
         } catch (error) {
             console.error('Error adding recurring task:', error);
         }
@@ -77,11 +75,10 @@ const RecurringTasksPage = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            if (response.ok) {
+            if (response.ok)
                 loadRecurringTasks(); // Reload tasks after deletion
-            } else {
+            else
                 console.error('Failed to delete recurring task');
-            }
         } catch (error) {
             console.error('Error deleting recurring task:', error);
         }
@@ -95,7 +92,6 @@ const RecurringTasksPage = () => {
         <div>
             <h1>Recurring Tasks</h1>
 
-            {/* Add New Recurring Task Form */}
             <h2>Add New Recurring Tasks</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -139,7 +135,6 @@ const RecurringTasksPage = () => {
                 <button type="submit">Add Recurring Task</button>
             </form>
 
-            {/* Recurring Tasks Table */}
             <h2>Current Recurring Tasks</h2>
             <table>
                 <thead>

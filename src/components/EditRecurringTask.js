@@ -8,18 +8,17 @@ const EditRecurringTaskPage = () => {
         title: '',
         description: '',
         repeatInterval: '',
-        nextOccurrence: '',
-        customInterval: '',
+        nextOccurrence: ''
     });
-    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('token'); //retrieve the JWT token from localStorage. If there is none, all the requests will fail with 403
     const backendUrl = process.env.REACT_APP_API_URL;
 
     
-    const { id } = useParams(); // Get the task ID from the URL params
+    const { id } = useParams(); //get the task ID from the URL params
     
     const navigate = useNavigate();
 
-    // Fetch the task details from the server
+    //call API to fetch the correct task
     const loadCurrentTask = async () => {
         try {
             const response = await fetch(`${backendUrl}/api/recurring-tasks/${id}`, {
@@ -31,35 +30,22 @@ const EditRecurringTaskPage = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                setTask({
-                    ...data,
-                    customInterval: '', // Reset the custom interval if the task is using predefined intervals
-                });
-            } else {
+                setTask(data);
+            }else
                 console.error('Failed to load recurring task');
-            }
         } catch (error) {
             console.error('Error loading recurring task:', error);
         }
     };
 
-    // Load the task data on mount and when the id changes
+    //load the task data on mount and when the id changes
     useEffect(() => {
         loadCurrentTask();
     });
 
-    // Handle the form submission to update the task
+    //handle the form submission to update the task in the DB / backend
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Determine the final repeat interval, handling custom intervals
-        const finalRepeatInterval =
-            task.repeatInterval === 'custom' ? task.customInterval : task.repeatInterval;
-
-        const taskToSubmit = {
-            ...task,
-            repeatInterval: finalRepeatInterval,
-        };
 
         try {
             const response = await fetch(`${backendUrl}/api/recurring-tasks/${id}`, {
@@ -68,14 +54,14 @@ const EditRecurringTaskPage = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(taskToSubmit),
+                body: JSON.stringify(task),
             });
 
-            if (response.ok) {
+            if (response.ok)
                 navigate('/recurring-tasks'); // Redirect back to the recurring tasks list
-            } else {
+            else
                 console.error('Failed to save recurring task');
-            }
+            
         } catch (error) {
             console.error('Error saving recurring task:', error);
         }

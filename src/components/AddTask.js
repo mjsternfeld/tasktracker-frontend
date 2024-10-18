@@ -5,13 +5,13 @@ const AddTask = () => {
   const [task, setTask] = useState({
     title: '',
     description: '',
-    status: 'inactive', // Default to "inactive"
+    status: 'inactive',
     deadline: '',
     subtasks: [],
   });
 
   const [templates, setTemplates] = useState([]);
-  const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+  const token = localStorage.getItem('token'); //retrieve JWT from localStorage
   const backendUrl = process.env.REACT_APP_API_URL;
 
 
@@ -24,30 +24,29 @@ const AddTask = () => {
       description: template.description,
       status: template.status,
       deadline: formattedDeadline,
-      subtasks: template.subtasks || [],  // Ensure that subtasks are handled even if undefined
+      subtasks: template.subtasks || [],  //ensure that subtasks are handled even if undefined
     });
   };
 
-  // Fetch templates from the API
+  //fetch task templates from the API
   const fetchTemplates = () => {
     fetch(`${backendUrl}/api/tasks/templates`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
       }
-    })  // Assuming this endpoint returns tasks where isTemplate=true
+    })
       .then(response => response.json())
-      .then(data => setTemplates(data))  // Save templates into state
+      .then(data => setTemplates(data))  //save templates into state
       .catch(error => console.error('Error fetching templates:', error));
   };
 
 
   useEffect(() => {
     fetchTemplates();
-  }, []); // Empty dependency array means this runs once on mount
+  }, []); 
 
-
-  // Handle input changes for the task fields
+  //for the "normal" task fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTask({
@@ -56,7 +55,6 @@ const AddTask = () => {
     });
   };
 
-  // Handle input changes for the subtasks
   const handleSubtaskChange = (index, e) => {
     const { name, value } = e.target;
     const updatedSubtasks = task.subtasks.map((subtask, i) =>
@@ -71,62 +69,52 @@ const AddTask = () => {
   };
   
 
-  // Add a new subtask input field
+  //add a new subtask input field
   const addSubtask = () => {
     setTask({ ...task, subtasks: [...task.subtasks, { title: '', description: '', status: 'inactive', deadline: '' }] });
   };
 
-  // Submit the form with a POST request
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
-
-
-
-    // Make a shallow copy of the task object to avoid mutating the state directly
+    //shallow copy of the task object to avoid mutating the state directly
     const taskToSubmit = {
       title: task.title,
       description: task.description,
       status: task.status,
       deadline: task.deadline,  
       subtasks: task.subtasks.map(subtask => {
-        const { subtaskId, ...rest } = subtask;  // Remove the 'id' field
+        const { subtaskId, ...rest } = subtask;  //remove id
         return rest
       })
     };
 
     const token = localStorage.getItem('token');
 
-    // Example POST request
     fetch(`${backendUrl}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(taskToSubmit), // Send task with subtasks as JSON
+      body: JSON.stringify(taskToSubmit), //Send task with subtasks array as JSON
     })
       .then((response) => {
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error('Failed to save task');
-        }
         return response.json();
       })
       .then((data) => {
         console.log('Task saved:', data);
-        // Handle successful task save (e.g., navigate back to task list)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   };
 
-
-  // Submit the form with a POST request
   const handleSubmitTemplate = (e) => {
     e.preventDefault();
-    // Make a shallow copy of the task object to avoid mutating the state directly
+    //shallow copy of the task object to avoid mutating the state directly
     const taskToSubmit = {
       title: task.title,
       description: task.description,
@@ -134,30 +122,27 @@ const AddTask = () => {
       deadline: task.deadline,
       template: true,  
       subtasks: task.subtasks.map(subtask => {
-        const { subtaskId, ...rest } = subtask;  // Remove the 'id' field
+        const { subtaskId, ...rest } = subtask;  //remove ID
         return rest
       })
     };
 
     const token = localStorage.getItem('token');
-    // Example POST request
     fetch(`${backendUrl}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(taskToSubmit), // Send task with subtasks as JSON
+      body: JSON.stringify(taskToSubmit), //send task with subtasks array as JSON
     })
       .then((response) => {
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error('Failed to save template');
-        }
         return response.json();
       })
       .then((data) => {
         console.log('Template saved:', data);
-        // Handle successful task save (e.g., navigate back to task list)
         fetchTemplates();
       })
       .catch((error) => {
@@ -177,11 +162,10 @@ const AddTask = () => {
             }
         })
             .then(response => {
-                if (response.ok) {
+                if (response.ok)
                   fetchTemplates();
-                } else {
+                else
                     console.error('Error deleting task');
-                }
             })
             .catch(error => console.error('Error:', error));
     }

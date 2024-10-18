@@ -1,4 +1,3 @@
-// src/components/Dashboard.js
 import React, {useState, useEffect} from 'react';
 import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
 
     const [tasks, setTasks] = useState([]);
-    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('token'); //retrieve JWT from localStorage
     const backendUrl = process.env.REACT_APP_API_URL;
-
-
 
     useEffect(() => {
         fetchTasks();
-    }, []); // Empty dependency array means this runs once on mount
-
+    }, []);
 
     const fetchTasks = () => {
       fetch(`${backendUrl}/api/tasks`, {
@@ -32,19 +28,19 @@ const Dashboard = () => {
     };
 
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false); // Track if the dialog is open
-    const [selectedTask, setSelectedTask] = useState(null); // Track which task is being updated
-    const [newStatus, setNewStatus] = useState(''); // Track the selected status
+    const [isDialogOpen, setIsDialogOpen] = useState(false); //track if the dialog is open
+    const [selectedTask, setSelectedTask] = useState(null); //track which task is being updated
+    const [newStatus, setNewStatus] = useState(''); //track the selected status from the new status dialog
 
     const handleComplete = async (task) => {
       setSelectedTask(task)  
-      setIsDialogOpen(true); // Open the dialog
+      setIsDialogOpen(true);
     }
 
     const handleSubmit = async () => {
       const updatedTask = {
         ...selectedTask,
-        status: newStatus, // Update the status while keeping other fields unchanged
+        status: newStatus, //update only the status
       };
       try {
           const response = await fetch(`${backendUrl}/api/tasks/${updatedTask.id}`, {
@@ -58,11 +54,9 @@ const Dashboard = () => {
 
           if (response.ok) {
               console.log('Task status updated successfully!');
-              setIsDialogOpen(false); // Close the dialog after success
-              // Optionally reload tasks or update task list in the UI here
-          } else {
+              setIsDialogOpen(false); //close dialog after success
+          } else
               console.error('Failed to update task status');
-          }
       } catch (error) {
           console.error('Error updating task status:', error);
       }
@@ -70,7 +64,7 @@ const Dashboard = () => {
     };
 
     const handleCancel = () => {
-        setIsDialogOpen(false); // Close the dialog without making changes
+        setIsDialogOpen(false); //close the dialog without making changes
     };
 
 

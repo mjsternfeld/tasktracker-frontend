@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './EditTask.css';
 
 const EditTask = () => {
-    const { taskId } = useParams(); // Get taskId from URL params
+    const { taskId } = useParams(); //get taskId from URL params
     const navigate = useNavigate();
     const [task, setTask] = useState({
         title: '',
@@ -12,7 +12,7 @@ const EditTask = () => {
         deadline: '',
         subtasks: []
     });
-    const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('token'); //retrieve JWT from localStorage
     const backendUrl = process.env.REACT_APP_API_URL;
 
 
@@ -35,7 +35,6 @@ const EditTask = () => {
         });
     };
 
-    // Handle changes to the subtasks
     const handleSubtaskChange = (index, e) => {
         const { name, value } = e.target;
         const updatedSubtasks = [...task.subtasks];
@@ -49,7 +48,7 @@ const EditTask = () => {
         });
     };
 
-    // Add a new blank subtask to the list
+    //add a new blank subtask to the list
     const addSubtask = () => {
         setTask({
         ...task,
@@ -57,7 +56,7 @@ const EditTask = () => {
         });
     };
 
-    // Remove a subtask from the list
+    //remove a subtask from the list
     const removeSubtask = (index) => {
         const updatedSubtasks = task.subtasks.filter((_, i) => i !== index);
         setTask({
@@ -66,7 +65,7 @@ const EditTask = () => {
         });
     };
 
-
+    //update task in DB
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch(`${backendUrl}/api/tasks/${taskId}`, {
@@ -78,9 +77,8 @@ const EditTask = () => {
             body: JSON.stringify(task),
         })
             .then(response => {
-                if (!response.ok) {
+                if (!response.ok)
                     throw new Error('Failed to update task');
-                }
                 return response.json();
             })
             .then(() => {
