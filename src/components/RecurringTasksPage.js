@@ -12,6 +12,7 @@ const RecurringTasksPage = () => {
     });
     const navigate = useNavigate();
     const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const backendUrl = process.env.REACT_APP_API_URL;
 
 
     // Load the existing recurring tasks from the backend
@@ -21,7 +22,7 @@ const RecurringTasksPage = () => {
 
     const loadRecurringTasks = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/recurring-tasks', {
+            const response = await fetch(`${backendUrl}/api/recurring-tasks`, {
                 headers:{
                     'Authorization': `Bearer ${token}`
                 }
@@ -41,7 +42,7 @@ const RecurringTasksPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:8080/api/recurring-tasks', {
+            const response = await fetch(`${backendUrl}/api/recurring-tasks`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const RecurringTasksPage = () => {
 
     const handleDelete = async (taskId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/recurring-tasks/${taskId}`, {
+            const response = await fetch(`${backendUrl}/api/recurring-tasks/${taskId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

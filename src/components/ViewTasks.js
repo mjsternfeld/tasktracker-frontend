@@ -6,10 +6,11 @@ const ViewTasks = () => {
     const [tasks, setTasks] = useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const backendUrl = process.env.REACT_APP_API_URL;
 
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/tasks', {
+        fetch(`${backendUrl}/api/tasks`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -26,7 +27,7 @@ const ViewTasks = () => {
     
     const handleDelete = (taskId) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
-            fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+            fetch(`${backendUrl}/api/tasks/${taskId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

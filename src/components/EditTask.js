@@ -13,10 +13,11 @@ const EditTask = () => {
         subtasks: []
     });
     const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const backendUrl = process.env.REACT_APP_API_URL;
 
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+        fetch(`${backendUrl}/api/tasks/${taskId}`, {
             headers:{
                 'Authorization': `Bearer ${token}`
             }
@@ -68,7 +69,7 @@ const EditTask = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:8080/api/tasks/${taskId}`, {
+        fetch(`${backendUrl}/api/tasks/${taskId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

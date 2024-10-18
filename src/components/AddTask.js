@@ -12,6 +12,7 @@ const AddTask = () => {
 
   const [templates, setTemplates] = useState([]);
   const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+  const backendUrl = process.env.REACT_APP_API_URL;
 
 
   const loadTemplate = (template) => {
@@ -29,7 +30,7 @@ const AddTask = () => {
 
   // Fetch templates from the API
   const fetchTemplates = () => {
-    fetch('http://localhost:8080/api/tasks/templates', {
+    fetch(`${backendUrl}/api/tasks/templates`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -98,7 +99,7 @@ const AddTask = () => {
     const token = localStorage.getItem('token');
 
     // Example POST request
-    fetch('http://localhost:8080/api/tasks', {
+    fetch(`${backendUrl}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -140,7 +141,7 @@ const AddTask = () => {
 
     const token = localStorage.getItem('token');
     // Example POST request
-    fetch('http://localhost:8080/api/tasks', {
+    fetch(`${backendUrl}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ const AddTask = () => {
 
   const handleDeleteTemplate = (template) => {
     if (window.confirm('Are you sure you want to delete this template?')) {
-        fetch(`http://localhost:8080/api/tasks/${template.id}`, {
+        fetch(`${backendUrl}/api/tasks/${template.id}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`

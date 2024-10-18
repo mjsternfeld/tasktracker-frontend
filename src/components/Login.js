@@ -7,7 +7,7 @@ const LoginPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
-    
+    const backendUrl = process.env.REACT_APP_API_URL;
 
     const handleRegister = async (e) => {
         e.preventDefault(); // Prevent page reload
@@ -15,7 +15,7 @@ const LoginPage = () => {
         setSuccessMessage('');
 
         try {
-            const response = await fetch('http://localhost:8080/api/auth/register', {
+            const response = await fetch(`${backendUrl}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ const LoginPage = () => {
         setSuccessMessage('');
 
         try {
-            const response = await fetch('http://localhost:8080/api/auth/login', {
+            const response = await fetch(`${backendUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

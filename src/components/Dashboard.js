@@ -8,6 +8,7 @@ const Dashboard = () => {
 
     const [tasks, setTasks] = useState([]);
     const token = localStorage.getItem('token'); // Retrieve the JWT token from localStorage
+    const backendUrl = process.env.REACT_APP_API_URL;
 
 
 
@@ -17,7 +18,7 @@ const Dashboard = () => {
 
 
     const fetchTasks = () => {
-      fetch('http://localhost:8080/api/tasks', {
+      fetch(`${backendUrl}/api/tasks`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -46,7 +47,7 @@ const Dashboard = () => {
         status: newStatus, // Update the status while keeping other fields unchanged
       };
       try {
-          const response = await fetch(`http://localhost:8080/api/tasks/${updatedTask.id}`, {
+          const response = await fetch(`${backendUrl}/api/tasks/${updatedTask.id}`, {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json',
