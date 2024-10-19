@@ -1,89 +1,45 @@
-/* General Page Styling */
-body {
-    background-color: #121212;
-    color: #E0E0E0;
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-}
-
-/* Form Styling */
-form {
-    margin-bottom: 20px;
-}
-
-form div {
-    margin-bottom: 15px;
-}
-
-label {
-    font-size: 1.2rem;
-    color: #E0E0E0;
-}
-
-input[type="text"],
-input[type="datetime-local"],
-select {
+.rec-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    color:white;
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
+    border: 2px solid #3e3e5c; 
+    color: #f0f0f0; 
     border-radius: 5px;
-    background-color: #1E1E1E;
-    color: #E0E0E0;
-    border: 1px solid #555;
-    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: #121212;
 }
 
-select option {
-    background-color: #2C2C2C;
-    color: #E0E0E0;
+.rec-save {
+  background-color: #64b5f6;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
-/* Button Styling */
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-right: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+.rec-actions-buttons {
+    background-color: #64b5f6;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th,
-td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #555;
-}
-
-th {
-    background-color: #1E1E1E;
-}
-
-tbody tr:hover {
-    background-color: #2C2C2C;
-}
-
-/* Complete Button Specific Styling */
-.complete-button {
-    background-color: #28a745;
-    padding: 5px 10px;
-    margin-top: 10px;
-}
-
-.complete-button:hover {
-    background-color: #218838;
+.add-rec-field {
+    margin-bottom: 10px;
 }

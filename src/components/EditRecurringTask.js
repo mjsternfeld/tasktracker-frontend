@@ -72,7 +72,7 @@ const EditRecurringTaskPage = () => {
             <h1>Edit Recurring Task</h1>
 
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="edit-rec-field">
                     <label>Title:</label>
                     <input
                         type="text"
@@ -82,7 +82,7 @@ const EditRecurringTaskPage = () => {
                     />
                 </div>
 
-                <div>
+                <div className="edit-rec-field">
                     <label>Description:</label>
                     <input
                         type="text"
@@ -92,9 +92,10 @@ const EditRecurringTaskPage = () => {
                     />
                 </div>
 
-                <div>
+                <div className="edit-rec-field">
                     <label>Repeat Interval:</label>
                     <select
+                        className="status-select"
                         value={task.repeatInterval}
                         onChange={(e) => setTask({ ...task, repeatInterval: e.target.value })}
                     >
@@ -106,20 +107,7 @@ const EditRecurringTaskPage = () => {
                     </select>
                 </div>
 
-                {task.repeatInterval === 'custom' && (
-                    <div>
-                        <label>Custom Interval:</label>
-                        <input
-                            type="text"
-                            placeholder="e.g., 3h, 2d"
-                            value={task.customInterval}
-                            onChange={(e) => setTask({ ...task, customInterval: e.target.value })}
-                            required
-                        />
-                    </div>
-                )}
-
-                <div>
+                <div className="edit-rec-field">
                     <label>Next Occurrence:</label>
                     <input
                         type="datetime-local"

@@ -1,135 +1,113 @@
-/* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #121212; /* Dark background */
-  color: #E0E0E0; /* Light text */
-  margin: 0;
-  padding: 0;
+/* Dashboard.css */
+
+/* Header */
+.dashboard-container h1 {
+  font-size: 2.5em;
+  text-align: center;
+  color: #f0f0f0;
+  margin-bottom: 20px;
 }
 
-.dashboard-container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #1E1E1E; /* Slightly lighter than background */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/* Highlighted Tasks container */
+.highlightTasks {
+  margin-bottom: 30px;
+  color: #252533;
 }
 
-/* Accent and Button Styling */
+
+
+/* Buttons */
 .dashboard-button {
-  background-color: #007BFF; /* Light blue accent */
-  color: white;
+  background-color: #64b5f6;
   border: none;
   padding: 10px 20px;
-  margin: 10px;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 4px;
+  color: #fff;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.button-container {
-  display: grid;
-  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
 }
 
 .dashboard-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #42a5f5;
 }
 
-/* Table Styling */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #2C2C2C;
+.complete-button {
+  background-color: #28a745;
 }
 
-table thead {
-  background-color: #1F1F1F;
+.complete-button:hover {
+  background-color: #218838;
 }
 
-table th, table td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #333;
-}
-
-table th {
-  color: #B0C4DE; /* Light blue accent */
-}
-
-table tr:hover {
-  background-color: #383838; /* Slight hover effect */
-}
-
-table td button {
-  background-color: #007BFF;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-table td button:hover {
-  background-color: #0056b3;
-}
-
-/* Dialog Styling */
+/* Dialog */
 .dialog {
-  background-color: #2C2C2C;
+  background-color: #3f3f4d;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
 }
 
 .dialog h3 {
-  color: #B0C4DE;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-.dialog label, .dialog select {
-  color: #E0E0E0;
-  margin: 10px 0;
+.dialog label {
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.dialog select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  font-size: 1rem;
 }
 
 .dialog button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #007BFF;
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #64b5f6;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin: 5px;
 }
 
 .dialog button:hover {
-  background-color: #0056b3;
+  background-color: #42a5f5;
 }
 
-/* Highlight Tasks Section */
-.highlightTasks {
-  margin: 20px 0;
-  padding: 20px;
-  background-color: #1E1E1E;
-  border-radius: 10px;
+/* Button container styling */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
 
-/* Dialog Dropdown Styling */
-select {
-  background-color: #1E1E1E;
-  color: #E0E0E0;
-  padding: 10px;
-  border: 1px solid #555;
-  border-radius: 5px;
-  font-size: 1rem;
-  margin: 10px 0;
-  width: 100%;
+.button-container .dashboard-button {
+  margin: 0 10px;
 }
 
-select option {
-  background-color: #2C2C2C;
-  color: #E0E0E0;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table th, table td {
+    padding: 8px 10px;
+  }
+
+  .dashboard-button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .dialog {
+    padding: 15px;
+  }
 }

@@ -1,0 +1,99 @@
+.add-select {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    color:white;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #3e3e5c; 
+    color: #f0f0f0; 
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    background-color: #121212;
+}
+
+.subtask-div {
+    width: inherit;
+    display: grid;
+    align-items: center;
+}
+
+
+.remove-st-button {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #64b5f6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.field-div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.add-subtask-button {
+    background-color: #64b5f6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+
+.add-save-buttons-div {
+    display: flex;
+}
+
+.add-save-buttons-div button + button {
+    margin-left: 10px;
+}
+
+.add-save-buttons{
+    background-color: #64b5f6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    height: inherit;
+    margin-bottom: 40px;
+    transition: background-color 0.3s;
+}
+
+.template-line {
+    display: grid;
+    margin-bottom: 30px;
+}
+
+.template-buttons {
+    background-color: #64b5f6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    height: inherit;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.template-title {
+    align-content: center;
+
+}

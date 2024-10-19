@@ -1,69 +1,50 @@
-/* General styling for the login page */
 .login-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
+    align-items: center;
+    color: #f0f0f0; 
 
-.login-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    padding: 20px;
-    background-color: #ffffff;
+    background-color: #252533;
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    width: 320px;
+    
 }
 
-.login-form h1 {
-    text-align: center;
+
+.input-group {
     margin-bottom: 20px;
 }
 
-.input-group {
-    margin-bottom: 15px;
-}
 
-.input-group label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #333333;
-}
 
-.input-group input {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    width: 100%;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
+.login-buttons {
+    background-color: #64b5f6;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
     cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.login-buttons:hover {
+    background-color: #42a5f5;
   }
 
-button:hover {
-    background-color: #45a049;
-}
-
 .error-message {
-    color: red;
-    font-size: 14px;
+    color: #ff6b6b;
     margin-bottom: 10px;
-    text-align: center;
+    font-size: 14px;
 }
 
 .success-message {
-    color: green;
-    font-size: 14px;
+    color: #4caf50;
     margin-bottom: 10px;
-    text-align: center;
+    font-size: 14px;
 }

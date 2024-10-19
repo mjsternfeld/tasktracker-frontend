@@ -89,12 +89,12 @@ const RecurringTasksPage = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <h1>Recurring Tasks</h1>
 
             <h2>Add New Recurring Tasks</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="add-rec-field">
                     <label>Title:</label>
                     <input
                         type="text"
@@ -103,7 +103,7 @@ const RecurringTasksPage = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="add-rec-field">
                     <label>Description:</label>
                     <input
                         type="text"
@@ -112,9 +112,10 @@ const RecurringTasksPage = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="add-rec-field">
                     <label>Repeat Interval:</label>
                     <select
+                        className="rec-select"
                         value={newTask.repeatInterval}
                         onChange={(e) => setNewTask({ ...newTask, repeatInterval: e.target.value })}
                     >
@@ -123,7 +124,7 @@ const RecurringTasksPage = () => {
                         <option value='P1M'>Monthly</option>
                     </select>
                 </div>
-                <div>
+                <div className="add-rec-field">
                     <label>Starting date:</label>
                     <input
                         type="datetime-local"
@@ -132,7 +133,7 @@ const RecurringTasksPage = () => {
                         required
                     />
                 </div>
-                <button type="submit">Add Recurring Task</button>
+                <button className="rec-save" type="submit">Save Recurring Task</button>
             </form>
 
             <h2>Current Recurring Tasks</h2>
@@ -154,8 +155,8 @@ const RecurringTasksPage = () => {
                             <td>{task.repeatInterval}</td>
                             <td>{task.nextOccurrence}</td>
                             <td>
-                                <button onClick={() => handleEdit(task.id)}>Edit</button>
-                                <button onClick={() => handleDelete(task.id)}>Delete</button>
+                                <button className="rec-actions-buttons" onClick={() => handleEdit(task.id)}>Edit</button>
+                                <button className="rec-actions-buttons" onClick={() => handleDelete(task.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}

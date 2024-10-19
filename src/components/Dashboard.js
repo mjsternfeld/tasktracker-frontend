@@ -86,7 +86,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className="dashboard-container">
+    <div className="container">
       <h1>Task Tracker</h1>
       
       <div className='highlightTasks'>
@@ -103,6 +103,7 @@ const Dashboard = () => {
                             <th>Subtasks</th>
                             <th>Status</th>
                             <th>Deadline</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -123,7 +124,7 @@ const Dashboard = () => {
                                 </td>
                                 <td>{task.status}</td>
                                 <td>{task.deadline}</td>
-                                <button className="dashboard-button complete-button" onClick={() => handleComplete(task)}>Complete task</button>
+                                <td><button className="dashboard-button complete-button" onClick={() => handleComplete(task)}>Complete task</button></td>
                             </tr>
                         ))}
                     </tbody>

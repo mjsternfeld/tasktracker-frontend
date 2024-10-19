@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import './AddTask.css';
 
 const AddTask = () => {
   const [task, setTask] = useState({
@@ -174,10 +175,10 @@ const AddTask = () => {
 
 
   return (
-    <div>
+    <div className="container">
       <h1>Add Task</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="field-div">
           <label htmlFor="title">Title:</label>
           <input
             type="text"
@@ -188,7 +189,7 @@ const AddTask = () => {
             required
           />
         </div>
-        <div>
+        <div className="field-div">
           <label htmlFor="description">Description:</label>
           <input
             type="text"
@@ -198,11 +199,10 @@ const AddTask = () => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className="field-div">
           <label htmlFor="status">Status:</label>
           <select
-            id="status"
-            name="status"
+            className="add-select"
             value={task.status}
             onChange={handleInputChange}
           >
@@ -213,7 +213,7 @@ const AddTask = () => {
             <option value="notRelevantAnymore">Not Relevant Anymore</option>
           </select>
         </div>
-        <div>
+        <div className="field-div">
           <label htmlFor="deadline">Deadline:</label>
           <input
             type="date"
@@ -224,9 +224,9 @@ const AddTask = () => {
           />
         </div>
 
-        <h3>Subtasks</h3>
+        <h3 className="subtask-h3">Subtasks</h3>
         {task.subtasks.map((subtask, index) => (
-          <div key={index}>
+          <div key={index} className="subtask-div">
             <label htmlFor={`title-${index}`}>Subtask {index + 1} Title:</label>
             <input
               type="text"
@@ -247,6 +247,7 @@ const AddTask = () => {
             
             <label htmlFor={`subtaskStatus-${index}`}>Status:</label>
             <select
+              className="add-select"
               id={`status-${index}`}
               name="status"
               value={subtask.status}
@@ -268,30 +269,32 @@ const AddTask = () => {
               onChange={(e) => handleSubtaskChange(index, e)}
             />
 
-            <button type="button" onClick={() => removeSubtask(index)}>Remove</button>
+            <button className="remove-st-button" type="button" onClick={() => removeSubtask(index)}>Remove</button>
 
           </div>
         ))}
 
-        <button type="button" onClick={addSubtask}>
+        <button className="add-subtask-button" type="button" onClick={addSubtask}>
           Add Subtask
         </button>
 
         <br />
-        <button type="submit">Save</button>
-        <button type="button" onClick={handleSubmitTemplate}>Save as Template</button>        
+        <div className="add-save-buttons-div">
+          <button className="add-save-buttons" type="submit">Save</button>
+          <button className="add-save-buttons" type="button" onClick={handleSubmitTemplate}>Save as Template</button>        
+          </div>
       </form>
     
-      <h2>Or choose a template</h2>
+      <h2>Or Choose a Template</h2>
         {templates.length === 0 ? (
             <p>No templates available.</p>
         ) : (
             <ul>
                 {templates.map(template => (
-                    <li key={template.id}>
-                        <span>{template.title}</span>
-                        <button onClick={() => loadTemplate(template)}>Use this template</button>
-                        <button onClick={() => handleDeleteTemplate(template)}>Delete this template</button>
+                    <li className="template-line" key={template.id}>
+                        <h3 className="template-title">{template.title}</h3>
+                        <button className="template-buttons" onClick={() => loadTemplate(template)}>Use this template</button>
+                        <button className="template-buttons" onClick={() => handleDeleteTemplate(template)}>Delete this template</button>
                     </li>
                 ))}
             </ul>

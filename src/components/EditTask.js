@@ -90,10 +90,10 @@ const EditTask = () => {
     };
 
     return (
-      <div className="container">
+      <div className="edit-container">
       <h1>Edit Task</h1>
       <form onSubmit={handleSubmit}>
-          <div>
+          <div className='edit-field'>
               <label htmlFor="title">Title:</label>
               <input
                   type="text"
@@ -104,7 +104,7 @@ const EditTask = () => {
                   required
               />
           </div>
-          <div>
+          <div className='edit-field'>
               <label htmlFor="description">Description:</label>
               <input
                   type="text"
@@ -114,11 +114,12 @@ const EditTask = () => {
                   onChange={handleInputChange}
               />
           </div>
-          <div>
+          <div className='edit-field'>
               <label htmlFor="status">Status:</label>
               <select
                   id="status"
                   name="status"
+                  className="status-select"
                   value={task.status}
                   onChange={handleInputChange}
               >
@@ -129,7 +130,7 @@ const EditTask = () => {
                   <option value="notRelevantAnymore">Not Relevant Anymore</option>
               </select>
           </div>
-          <div>
+          <div className='edit-field'>
               <label htmlFor="deadline">Deadline:</label>
               <input
                   type="date"
@@ -140,7 +141,7 @@ const EditTask = () => {
               />
           </div>
 
-          <h3>Subtasks</h3>
+          <h3 className="subtask-h3">Subtasks</h3>
           {task.subtasks.length > 0 ? (
               task.subtasks.map((subtask, index) => (
                   <div key={index}>
@@ -167,6 +168,7 @@ const EditTask = () => {
                       <div>
                           <label htmlFor={`subtaskStatus-${index}`}>Subtask status:</label>
                           <select
+                              className="status-select"
                               id={`subtaskStatus-${index}`}
                               name="status"
                               value={subtask.status}
@@ -188,7 +190,7 @@ const EditTask = () => {
                               onChange={(e) => handleSubtaskChange(index, e)}
                           />
                       </div>
-                      <button type="button" onClick={() => removeSubtask(index)}>
+                      <button className="remove-button" type="button" onClick={() => removeSubtask(index)}>
                           Remove Subtask
                       </button>
                   </div>
@@ -196,12 +198,11 @@ const EditTask = () => {
           ) : (
               <p>No subtasks available.</p>
           )}
-          <button type="button" onClick={addSubtask}>
+          <div className='buttons-container'>
+              <button className="add-st-button" type="button" onClick={addSubtask}>
               Add Subtask
-          </button>
-
-          <div>
-              <button type="submit">Save Changes</button>
+              </button>
+              <button className="save-button" type="submit">Save Changes</button>
           </div>
       </form>
   </div>

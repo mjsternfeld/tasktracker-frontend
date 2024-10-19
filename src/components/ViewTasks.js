@@ -45,7 +45,7 @@ const ViewTasks = () => {
 
 
     return (
-        <div>
+        <div className="container">
             <h1>Tasks List</h1>
             {tasks.length === 0 ? (
                 <p>No tasks available.</p>
@@ -81,8 +81,10 @@ const ViewTasks = () => {
                                 </td>
                                 <td>{task.status}</td>
                                 <td>{task.deadline}</td>
-                                <button onClick={() => handleEdit(task.id)}>Edit</button>
-                                <button onClick={() => handleDelete(task.id)}>Delete</button>
+                                <td>
+                                <button className="action-buttons" onClick={() => handleEdit(task.id)}>Edit</button>
+                                <button className="action-buttons" onClick={() => handleDelete(task.id)}>Delete</button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

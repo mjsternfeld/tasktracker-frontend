@@ -96,8 +96,8 @@ const LoginPage = () => {
                 </div>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 {successMessage && <p className="success-message">{successMessage}</p>}
-                <button onClick={handleRegister}>Register</button> 
-                <button onClick={handleLogin}>Login</button>
+                <button className="login-buttons" onClick={handleRegister}>Register</button> 
+                <button className="login-buttons" onClick={handleLogin}>Login</button>
             </form>
         </div>
     );
