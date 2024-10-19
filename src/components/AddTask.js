@@ -203,6 +203,7 @@ const AddTask = () => {
           <label htmlFor="status">Status:</label>
           <select
             className="add-select"
+            name="status"
             value={task.status}
             onChange={handleInputChange}
           >

@@ -68,19 +68,22 @@ const RecurringTasksPage = () => {
     };
 
     const handleDelete = async (taskId) => {
-        try {
-            const response = await fetch(`${backendUrl}/api/recurring-tasks/${taskId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (response.ok)
-                loadRecurringTasks(); // Reload tasks after deletion
-            else
-                console.error('Failed to delete recurring task');
-        } catch (error) {
-            console.error('Error deleting recurring task:', error);
+
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            try {
+                const response = await fetch(`${backendUrl}/api/recurring-tasks/${taskId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (response.ok)
+                    loadRecurringTasks(); // Reload tasks after deletion
+                else
+                    console.error('Failed to delete recurring task');
+            } catch (error) {
+                console.error('Error deleting recurring task:', error);
+            }
         }
     };
 

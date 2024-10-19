@@ -26,8 +26,12 @@
   transition: background-color 0.3s;
 }
 
+.rec-save:hover {
+    background-color: #42a5f5;
+}
+
 .rec-actions-buttons {
-    background-color: #64b5f6;
+  background-color: #64b5f6;
   border: none;
   padding: 10px 20px;
   margin-top: 10px;
@@ -39,6 +43,11 @@
   width: 100%;
   transition: background-color 0.3s;
 }
+
+.rec-actions-buttons:hover {
+    background-color: #42a5f5;
+}
+
 
 .add-rec-field {
     margin-bottom: 10px;

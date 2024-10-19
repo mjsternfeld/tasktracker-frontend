@@ -51,6 +51,10 @@
     transition: background-color 0.3s;
 }
 
+.add-subtask-button:hover {
+    background-color: #42a5f5;
+}
+
 
 .add-save-buttons-div {
     display: flex;
@@ -74,6 +78,10 @@
     transition: background-color 0.3s;
 }
 
+.add-save-buttons:hover {
+    background-color: #42a5f5;
+}
+
 .template-line {
     display: grid;
     margin-bottom: 30px;
@@ -91,6 +99,10 @@
     height: inherit;
     margin-bottom: 10px;
     transition: background-color 0.3s;
+}
+
+.template-buttons:hover {
+    background-color: #42a5f5;
 }
 
 .template-title {

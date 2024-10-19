@@ -117,7 +117,7 @@ const EditRecurringTaskPage = () => {
                     />
                 </div>
 
-                <button type="submit">Save Changes</button>
+                <button className="edit-rec-save" type="submit">Save Changes</button>
             </form>
         </div>
 
