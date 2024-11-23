@@ -1,3 +1,5 @@
+//this page lists all of the user's active tasks and links to other features
+//also contains a dialog for marking tasks as complete / changing a task's status in general
 import React, {useState, useEffect} from 'react';
 import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +15,7 @@ const Dashboard = () => {
         fetchTasks();
     }, []);
 
+    //call tasks API to fetch all of the user's tasks, then filter them by "active" status
     const fetchTasks = () => {
       fetch(`${backendUrl}/api/tasks`, {
         method: 'GET',
@@ -32,11 +35,13 @@ const Dashboard = () => {
     const [selectedTask, setSelectedTask] = useState(null); //track which task is being updated
     const [newStatus, setNewStatus] = useState(''); //track the selected status from the new status dialog
 
+    //opens a dialog for updating a task's status
     const handleComplete = async (task) => {
       setSelectedTask(task)  
       setIsDialogOpen(true);
     }
 
+    //updates the task's status to the new status set in the dialog by calling the API
     const handleSubmit = async () => {
       const updatedTask = {
         ...selectedTask,
@@ -60,7 +65,7 @@ const Dashboard = () => {
       } catch (error) {
           console.error('Error updating task status:', error);
       }
-      fetchTasks();
+      fetchTasks(); //update tasks to visually confirm the status was changed
     };
 
     const handleCancel = () => {
@@ -79,9 +84,6 @@ const Dashboard = () => {
     }
     const handleRecTasks = async () => {
       navigate('/recurring-tasks');
-    }
-    const handleStats = async () => {
-      navigate('/dashboard');
     }
 
 

@@ -1,3 +1,4 @@
+//this page is used to add new recurring tasks and view existing ones, as well as linking to edit pages for these existing recurring tasks
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecurringTasksPage.css'; 
@@ -67,6 +68,7 @@ const RecurringTasksPage = () => {
         }
     };
 
+    //delete a specific task from the list of recurring tasks (delete button in that table row)
     const handleDelete = async (taskId) => {
 
         if (window.confirm('Are you sure you want to delete this task?')) {
@@ -78,7 +80,7 @@ const RecurringTasksPage = () => {
                     }
                 });
                 if (response.ok)
-                    loadRecurringTasks(); // Reload tasks after deletion
+                    loadRecurringTasks();
                 else
                     console.error('Failed to delete recurring task');
             } catch (error) {
@@ -87,6 +89,7 @@ const RecurringTasksPage = () => {
         }
     };
 
+    //redirect to an edit page for that specific task
     const handleEdit = async (taskId) => {
         navigate(`/edit-recTask/${taskId}`);
     };

@@ -1,14 +1,17 @@
+//this is the starting page if the user is not logged in
+//provides basic register / login functionality and is used to retrieve JWTs for authentication on all the other pages
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';  // Import the CSS for styling
+import './Login.css';
 
 const LoginPage = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
-    const backendUrl = process.env.REACT_APP_API_URL;
+    const backendUrl = process.env.REACT_APP_API_URL; //field in the .env file which provides the URL for the backend API
 
+    //accesses the register API with the new credentials
     const handleRegister = async (e) => {
         e.preventDefault(); //prevent page reload
         setErrorMessage('');

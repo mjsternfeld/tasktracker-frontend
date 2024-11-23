@@ -1,3 +1,4 @@
+//this page / component is used to show all of the user's tasks, with buttons for the edit / delete functionality for each task
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ViewTasks.css';
@@ -24,7 +25,7 @@ const ViewTasks = () => {
     const handleEdit = (taskId) => {
         navigate(`/edit-task/${taskId}`);
     };
-    
+    //deleting a task with confirmation dialog
     const handleDelete = (taskId) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
             fetch(`${backendUrl}/api/tasks/${taskId}`, {

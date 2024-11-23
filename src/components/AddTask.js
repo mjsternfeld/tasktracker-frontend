@@ -1,3 +1,5 @@
+//this page is used to create new (regular) tasks and task templates, with the optional inclusion of subtasks
+//also contains a list of templates which can be used to create new tasks based on them (and the option to delete each of them)
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import './AddTask.css';
@@ -55,7 +57,7 @@ const AddTask = () => {
       [name]: value,
     });
   };
-
+  //subtask field changes
   const handleSubtaskChange = (index, e) => {
     const { name, value } = e.target;
     const updatedSubtasks = task.subtasks.map((subtask, i) =>
@@ -69,16 +71,16 @@ const AddTask = () => {
     setTask({ ...task, subtasks: updatedSubtasks });
   };
   
-
   //add a new subtask input field
   const addSubtask = () => {
     setTask({ ...task, subtasks: [...task.subtasks, { title: '', description: '', status: 'inactive', deadline: '' }] });
   };
 
+  //submit changes to store the new task in the DB / backend
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //shallow copy of the task object to avoid mutating the state directly
+    //copy of the task object to avoid mutating the state directly
     const taskToSubmit = {
       title: task.title,
       description: task.description,
@@ -113,6 +115,7 @@ const AddTask = () => {
       });
   };
 
+  //add the new task as a template to the DB / backend
   const handleSubmitTemplate = (e) => {
     e.preventDefault();
     //shallow copy of the task object to avoid mutating the state directly
@@ -128,7 +131,7 @@ const AddTask = () => {
       })
     };
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token'); //jwt for authentication in the request
     fetch(`${backendUrl}/api/tasks`, {
       method: 'POST',
       headers: {
@@ -153,7 +156,7 @@ const AddTask = () => {
       
   };
 
-
+  //delete a template from the list of templates
   const handleDeleteTemplate = (template) => {
     if (window.confirm('Are you sure you want to delete this template?')) {
         fetch(`${backendUrl}/api/tasks/${template.id}`, {

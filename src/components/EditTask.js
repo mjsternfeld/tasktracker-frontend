@@ -1,3 +1,5 @@
+//this page is used to edit specific tasks from the task list
+//url contains the ID of the task to be edited
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './EditTask.css';
@@ -15,7 +17,7 @@ const EditTask = () => {
     const token = localStorage.getItem('token'); //retrieve JWT from localStorage
     const backendUrl = process.env.REACT_APP_API_URL;
 
-
+    //fetch task to be edited using API
     useEffect(() => {
         fetch(`${backendUrl}/api/tasks/${taskId}`, {
             headers:{
@@ -26,7 +28,7 @@ const EditTask = () => {
             .then(data => setTask(data))
             .catch(error => console.error('Error fetching task:', error));
     }, [taskId]);
-
+    //update specific fields in the editor
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setTask({
@@ -34,7 +36,7 @@ const EditTask = () => {
             [name]: value,
         });
     };
-
+    //update specific fields in the subtask editor
     const handleSubtaskChange = (index, e) => {
         const { name, value } = e.target;
         const updatedSubtasks = [...task.subtasks];

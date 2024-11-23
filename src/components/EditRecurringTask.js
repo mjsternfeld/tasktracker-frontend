@@ -1,3 +1,5 @@
+//this page is used to edit specific recurring tasks
+//the url contains the task ID
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './EditRecurringTask.css';
